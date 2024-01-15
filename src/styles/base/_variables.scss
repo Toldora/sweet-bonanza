@@ -14,30 +14,22 @@
 
   --col-tibetan-yellow: #{$col-tibetan-yellow};
   --col-nuclear-fallout: #{$col-nuclear-fallout};
-  --col-red: #{$col-red};
-  --col-burtuqali-orange: #{$col-burtuqali-orange};
-  --col-pantone: #{$col-pantone};
-  --col-irradiated-green: #{$col-irradiated-green};
-  --col-pcb-green: #{$col-pcb-green};
-  --col-algal-fuel: #{$col-algal-fuel};
-  --col-algal-fuel-rgb: #{$col-algal-fuel-rgb};
   --col-gordons-green: #{$col-gordons-green};
   --col-kuro-green: #{$col-kuro-green};
-  --col-alpine-salamander: #{$col-alpine-salamander};
-  --col-alpine-salamander-rgb: #{$col-alpine-salamander-rgb};
   --col-rich-olive: #{$col-rich-olive};
   --col-vermilion-cinnabar: #{$col-vermilion-cinnabar};
   --col-radiant-silver: #{$col-radiant-silver};
   --col-bilberry: #{$col-bilberry};
   --col-island-palm: #{$col-island-palm};
+  --col-dark-seashore-night: #{$col-dark-seashore-night};
+  --col-dark-seashore-night-rgb: #{$col-dark-seashore-night-rgb};
 
   // Z-indexes
   --z-modal-overlay: 14;
   --z-modal: 9;
-  --z-app-navbar: 7;
+  --z-bonuses-section: 5;
   --z-wheel-btn: 4;
   --z-wheel: 3;
-  --z-maskot-decor: 2;
   --z-default: 1;
   --z-hidden: -1;
 
@@ -91,21 +83,8 @@
   // Common
   --scrollbar-color: var(--primary-text-color);
 
-  // App navbar
-  @media (orientation: portrait) {
-    --app-navbar-height: #{to-rem(120)};
-  }
-
-  @media (orientation: landscape) {
-    --app-navbar-height: #{to-rem(80)};
-
-    @include respond-above(tablet) {
-      --app-navbar-height: #{clamp(to-rem(100), vh(11.4), to-rem(120))};
-    }
-  }
-
   // App overlay
-  --app-overlay-bg: rgba(var(--col-alpine-salamander-rgb), 75%);
+  --app-overlay-bg: rgba(var(--col-dark-seashore-night-rgb), 80%);
 
   // Auth type radio
   --auth-type-radio-bg-hover: rgba(var(--col-total-white-rgb), 15%);
@@ -113,22 +92,18 @@
 
   // Wheel
   @media (orientation: portrait) {
-    --wheel-size-portrait: #{min(90vw, vh(48))};
-
-    @include respond-above(small) {
-      --wheel-size-portrait: #{min(82vw, vh(55))};
-    }
+    --wheel-size-portrait: #{min(90vw, vh(55))};
 
     @include respond-above(tablet) {
-      --wheel-size-portrait: #{min(85vw, vh(46))};
+      --wheel-size-portrait: #{min(85vw, vh(62))};
     }
   }
 
   @media (orientation: landscape) {
-    --wheel-size-landscape: #{min(46vw, vh(74))};
+    --wheel-size-landscape: #{min(52vw, vh(80))};
 
     @include respond-above(xmedium) {
-      --wheel-size-landscape: #{min(46vw, vh(66))};
+      --wheel-size-landscape: #{min(46vw, vh(78))};
     }
   }
 }

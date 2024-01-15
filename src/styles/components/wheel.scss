@@ -21,22 +21,18 @@
 }
 
 .wheel {
-  --btn-size: 25%;
+  --btn-size: 22%;
 
   position: relative;
   z-index: var(--z-wheel);
   aspect-ratio: 1;
   flex-shrink: 0;
   border-radius: 50%;
-  overflow: hidden;
+  // overflow: hidden;
   cursor: default;
 
   @media (orientation: landscape) {
-    position: absolute;
-    top: calc(45% - var(--wheel-size-landscape) / 2);
-    left: calc(50% - var(--wheel-size-landscape) / 2);
     height: 0;
-    flex-grow: 1;
     max-width: var(--wheel-size-landscape);
     padding-bottom: var(--wheel-size-landscape);
   }
@@ -49,24 +45,18 @@
   @include hover {
     cursor: pointer;
 
-    .wheel__btn,
-    .wheel__btn-border {
+    .wheel__btn {
       transform: translate(-50%, -50%) scale(1.15);
     }
 
     .wheel-stage-3 & {
       cursor: default;
 
-      .wheel__btn,
-      .wheel__btn-border {
+      .wheel__btn {
         transform: translate(-50%, -50%) scale(1);
       }
     }
   }
-}
-
-.wheel__wrapper {
-  @include bg-image('/img/wheel/wrapper', true);
 }
 
 .wheel__main {
@@ -99,37 +89,20 @@
   }
 }
 
-.wheel__backdrop {
-  @include bg-image('/img/wheel/backdrop', true);
-
-  background-size: 81%;
-  background-position: center 56%;
-}
-
-.wheel__winner-frame {
-  width: 34%;
-  height: 44%;
-  position: absolute;
-  top: 6%;
-  left: 50%;
-  transform: translateX(-50%);
-  filter: drop-shadow(
-    to-rem(5) -#{to-rem(2)} to-rem(4) rgba(var(--col-total-black-rgb), 55%)
-  );
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-
-  @include bg-img-webp('/img/wheel/winner-frame', true);
+.wheel__border {
+  @include bg-image('/img/wheel/border', true);
 }
 
 .wheel__pointer {
-  width: 12%;
-  height: 12%;
+  width: 16%;
+  height: 16%;
   position: absolute;
-  top: 2.5%;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
+  filter: drop-shadow(
+    0 to-rem(11) to-rem(7) rgba(var(--col-total-black-rgb), 25%)
+  );
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -137,25 +110,42 @@
   @include bg-img-webp('/img/wheel/pointer', true);
 }
 
-.wheel__btn-border {
-  width: calc(var(--btn-size) + 5.5%);
-  height: calc(var(--btn-size) + 5.5%);
-
-  @include bg-image('/img/wheel/button-border', true);
-
-  transform-origin: center;
-  transition: transform var(--hover-transition);
-  mix-blend-mode: multiply;
-}
-
 .wheel__btn {
-  width: var(--btn-size);
+  width: auto;
   height: var(--btn-size);
+  aspect-ratio: 1.4;
 
   @include bg-image('/img/wheel/button', true);
 
   transform-origin: center;
   transition: transform var(--hover-transition);
+}
+
+.wheel__bomb-decor {
+  width: 27%;
+  height: 27%;
+  position: absolute;
+  top: 20%;
+  left: -12%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  @include bg-img-webp('/img/bomb-decor', true);
+}
+
+.wheel__lollipop-decor {
+  width: 24%;
+  aspect-ratio: 0.785;
+  position: absolute;
+  top: 49%;
+  right: -8%;
+  transform: rotate(-5deg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  @include bg-img-webp('/img/lollipop-decor', true);
 }
 
 @keyframes wheel-shake-1 {

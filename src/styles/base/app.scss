@@ -21,7 +21,7 @@ html {
 body {
   width: 100%;
   max-width: 100%;
-  background-color: var(--col-pcb-green);
+  background-color: var(--col-dark-seashore-night);
   color: var(--primary-text-color);
 }
 
@@ -130,17 +130,68 @@ a {
   width: 100%;
   height: vh(100);
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center bottom;
+  background-size: min(90%, to-rem(400)), contain, cover;
+  background-position: top center, bottom center, center;
   overflow: hidden;
 
-  @include bg-img-webp('/img/bg/ver');
+  background-image: url('/img/logo/logo-small.png'),
+    url('/img/bg/bottom-decor-ver.png'), url('/img/bg/ver.jpg');
 
-  @media (orientation: landscape) {
-    @include bg-img-webp('/img/bg/hor');
+  @include high-resolution-screen {
+    background-image: url('/img/logo/logo-small@2x.png'),
+      url('/img/bg/bottom-decor-ver@2x.png'), url('/img/bg/ver@2x.jpg');
   }
 
-  @include respond-above(tablet) {
-    @include bg-img-webp('/img/bg/hor');
+  @supports (background-image: url('/img/logo/logo-small.webp')) {
+    background-image: url('/img/logo/logo-small.webp'),
+      url('/img/bg/bottom-decor-ver.webp'), url('/img/bg/ver.webp');
+
+    @include high-resolution-screen {
+      background-image: url('/img/logo/logo-small@2x.webp'),
+        url('/img/bg/bottom-decor-ver@2x.webp'), url('/img/bg/ver@2x.webp');
+    }
+  }
+
+  @media (orientation: landscape) {
+    background-size: min(28%, to-rem(530)), contain, cover;
+    background-position: 82% 0%, bottom center, center;
+
+    background-image: url('/img/logo/logo-small.png'),
+      url('/img/bg/bottom-decor-hor.png'), url('/img/bg/hor.jpg');
+
+    @include high-resolution-screen {
+      background-image: url('/img/logo/logo-small@2x.png'),
+        url('/img/bg/bottom-decor-hor@2x.png'), url('/img/bg/hor@2x.jpg');
+    }
+
+    @supports (background-image: url('/img/logo/logo-small.webp')) {
+      background-image: url('/img/logo/logo-small.webp'),
+        url('/img/bg/bottom-decor-hor.webp'), url('/img/bg/hor.webp');
+
+      @include high-resolution-screen {
+        background-image: url('/img/logo/logo-small@2x.webp'),
+          url('/img/bg/bottom-decor-hor@2x.webp'), url('/img/bg/hor@2x.webp');
+      }
+    }
+
+    @include respond-above(tablet) {
+      background-image: url('/img/logo/logo-big.png'),
+        url('/img/bg/bottom-decor-hor.png'), url('/img/bg/hor.jpg');
+
+      @include high-resolution-screen {
+        background-image: url('/img/logo/logo-big@2x.png'),
+          url('/img/bg/bottom-decor-hor@2x.png'), url('/img/bg/hor@2x.jpg');
+      }
+
+      @supports (background-image: url('/img/logo/logo-big.webp')) {
+        background-image: url('/img/logo/logo-big.webp'),
+          url('/img/bg/bottom-decor-hor.webp'), url('/img/bg/hor.webp');
+
+        @include high-resolution-screen {
+          background-image: url('/img/logo/logo-big@2x.webp'),
+            url('/img/bg/bottom-decor-hor@2x.webp'), url('/img/bg/hor@2x.webp');
+        }
+      }
+    }
   }
 }
