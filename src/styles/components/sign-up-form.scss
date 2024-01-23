@@ -32,7 +32,7 @@
 }
 
 .sign-up-form__accent-text {
-  color: var(--col-tibetan-yellow);
+  color: var(--col-sixteen-million-pink);
 }
 
 .sign-up-form__bonus-img-row {
@@ -42,8 +42,8 @@
 }
 
 .sign-up-form__bonus-img {
-  height: to-rem(80);
-  width: to-rem(80);
+  height: to-rem(120);
+  width: to-rem(120);
 
   &:not(:last-child) {
     margin-right: to-rem(30);
@@ -124,16 +124,12 @@
   margin-top: to-rem(8);
   padding: to-rem(10) calc(to-rem(16) + var(--hide-pass-btn-width, to-rem(0)))
     to-rem(10) to-rem(16);
-  background-color: var(--col-gordons-green);
+  background-color: var(--col-galactic-cruise);
   border: none;
   border-radius: to-rem(12);
   box-shadow: none;
   color: inherit;
   font-size: to-rem(14);
-
-  @include respond-above(small) {
-    background-color: var(--col-rich-olive);
-  }
 }
 
 .sign-up-form__auth-error {
@@ -249,7 +245,7 @@
   animation: spin 0.6s ease-in-out infinite;
 
   &--second {
-    color: rgba(var(--col-total-black-rgb), 50%);
+    color: rgba(var(--col-total-white-rgb), 50%);
     animation-delay: 0.2s;
     animation-direction: reverse;
   }

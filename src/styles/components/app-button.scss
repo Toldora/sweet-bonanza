@@ -1,8 +1,8 @@
 .app-button {
   min-height: to-rem(40);
   padding: 0 to-rem(24);
-  background-color: var(--col-tibetan-yellow);
-  color: var(--col-total-black);
+  background-color: var(--col-sixteen-million-pink);
+  color: var(--col-total-white);
   box-shadow: none;
   border-radius: to-rem(5);
   font-size: to-rem(14);
@@ -17,13 +17,13 @@
 
   &--disabled,
   &:disabled {
-    background-color: var(--col-nuclear-fallout);
+    background-color: var(--col-aunt-violet);
     cursor: default;
   }
 
   @include hover {
     &:not(:disabled):not(.app-button--disabled) {
-      background-color: var(--col-total-black);
+      background-color: var(--col-total-white);
     }
   }
 }
