@@ -1,7 +1,7 @@
 .app-button {
   min-height: to-rem(40);
   padding: 0 to-rem(24);
-  background-color: var(--col-sixteen-million-pink);
+  background-color: var(--col-fungal-hallucinations);
   color: var(--col-total-white);
   box-shadow: none;
   border-radius: to-rem(5);
@@ -23,7 +23,7 @@
 
   @include hover {
     &:not(:disabled):not(.app-button--disabled) {
-      background-color: var(--col-total-white);
+      background-color: var(--col-sixteen-million-pink);
     }
   }
 }
