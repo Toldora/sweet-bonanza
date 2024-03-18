@@ -98,6 +98,7 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 0 to-rem(10);
   font-size: to-rem(16);
 
   @include respond-above(medium) {
@@ -116,7 +117,6 @@
 }
 
 .bonuses-section__text--accent {
-  margin-right: to-rem(10);
   background: linear-gradient(
     180deg,
     #ffc700 25.89%,
