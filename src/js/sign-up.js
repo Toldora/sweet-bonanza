@@ -8,7 +8,8 @@ import { globalState } from '@/js/global-state';
 import { setToLS } from '@/js/local-storage';
 import { prepareInputMask } from '@/js/prepare-input-mask';
 import { generateId } from '@/js/generate-id';
-import { AUTH_FIELD, ERROR_MESSAGES } from '@/const';
+import { changeUserTag, getIsUserOptedIn } from '@/js/one-signal';
+import { AUTH_FIELD, ERROR_MESSAGES, ONE_SIGNAL_TAG } from '@/const';
 
 const modalContentRef = document.querySelector('.js-app-modal-content');
 let formRef = null;
@@ -121,6 +122,10 @@ const onSubmit = async event => {
     }
 
     setToLS('isAlreadyRegistered', true);
+
+    if (getIsUserOptedIn()) {
+      changeUserTag(ONE_SIGNAL_TAG.registered, '2');
+    }
 
     searchString.state = responseData?.autologinToken;
     const stringifiedSearch = queryString.stringify(searchString);

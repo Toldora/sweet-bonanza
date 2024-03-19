@@ -11,6 +11,7 @@ import { openSignUpModal } from '@/js/sign-up';
 import '@/js/terms-and-privacy';
 import useViewportSizes from '@/js/use-viewport-sizes';
 import { getFromLS } from '@/js/local-storage';
+import { initOneSignal } from '@/js/one-signal';
 
 useViewportSizes();
 
@@ -31,3 +32,5 @@ if (isLastStage) {
   setWheelLastStage();
   openSignUpModal({ isBlocked: true });
 }
+
+initOneSignal();
