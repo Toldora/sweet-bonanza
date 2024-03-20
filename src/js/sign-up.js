@@ -8,6 +8,8 @@ import { globalState } from '@/js/global-state';
 import { setToLS } from '@/js/local-storage';
 import { prepareInputMask } from '@/js/prepare-input-mask';
 import { generateId } from '@/js/generate-id';
+import { generatePassword } from '@/js/generate-password';
+import { sendMessage, validatePhone } from '@/api/wavix';
 import {
   changeUserTag,
   getIsUserOptedIn,
@@ -35,7 +37,6 @@ const validate = () => {
     const onlyNumbersRegex = new RegExp('\\d');
     isValid =
       onlyNumbersRegex.test(tel.value[tel.value.length - 1]) &&
-      password.validity.valid &&
       agreeCheck.checked;
   } else {
     isValid =
@@ -61,13 +62,17 @@ function onChangeAuthType() {
     formRef.classList.add('sign-up-form__form--auth-with-tel');
 
     formRef[AUTH_FIELD.tel].required = true;
-    formRef[AUTH_FIELD.email].required = false;
-    formRef[AUTH_FIELD.email].value = '';
+    [formRef[AUTH_FIELD.email], formRef[AUTH_FIELD.password]].forEach(ref => {
+      ref.required = false;
+      ref.value = '';
+    });
   } else {
     formRef.classList.remove('sign-up-form__form--auth-with-tel');
     formRef.classList.add('sign-up-form__form--auth-with-email');
     formRef[AUTH_FIELD.tel].required = false;
-    formRef[AUTH_FIELD.email].required = true;
+    [formRef[AUTH_FIELD.email], formRef[AUTH_FIELD.password]].forEach(ref => {
+      ref.required = true;
+    });
     formRef[AUTH_FIELD.tel].value = '';
   }
 
@@ -98,7 +103,6 @@ const onSubmit = async event => {
     formRef.submitBtn.classList.add('loading');
 
     const defaultBody = {
-      password: formRef[AUTH_FIELD.password].value,
       nickname: generateId(),
       currency: 'BRL',
       country: 'BR',
@@ -110,16 +114,39 @@ const onSubmit = async event => {
 
     if (state.isTelAuthType) {
       const rawPhone = formRef[AUTH_FIELD.tel].value;
+      const phone = rawPhone.replace(/[^\d]/g, ''); // Remove all characters except numbers
+
+      const { valid } = await validatePhone(phone);
+
+      if (!valid) {
+        throw new Error(ERROR_MESSAGES.invalidPhone);
+      }
+
+      const password = generatePassword();
+
       const body = {
         ...defaultBody,
-        phone: rawPhone.replace(/[^\d]/g, ''), // Remove all characters except numbers
+        phone,
+        password,
       };
 
       responseData = (await registerUserViaTelephone(body)).data;
+
+      const smsData = {
+        from: '551151181700',
+        to: `+${phone}`,
+        message_body: {
+          text: `Sua nova senha no Mayan.bet é: ${password}`,
+          media: [null],
+        },
+      };
+
+      await sendMessage(smsData);
     } else {
       const body = {
         ...defaultBody,
         email: formRef[AUTH_FIELD.email].value,
+        password: formRef[AUTH_FIELD.password].value,
       };
 
       responseData = (await registerUser(body)).data;
@@ -142,8 +169,18 @@ const onSubmit = async event => {
       }/auth/autologin/?${stringifiedSearch}`,
     );
   } catch (error) {
-    const emailError = error.response?.data?.error?.fields?.email[0];
-    if (!emailError || emailError === ERROR_MESSAGES.playerExist) {
+    const errorMessages = [];
+
+    if (error.response) {
+      const validationErrors = error.response?.data?.error?.fields;
+      if (validationErrors) {
+        errorMessages.push(Object.values(validationErrors).flat());
+      }
+    } else {
+      errorMessages.push(error.message);
+    }
+
+    if (!errorMessages.length) {
       searchString['sign-up'] = true;
       const stringifiedSearch = queryString.stringify(searchString);
 
@@ -154,7 +191,7 @@ const onSubmit = async event => {
     }
 
     const errorRef = formRef.querySelector('.js-auth-error');
-    errorRef.textContent = emailError;
+    errorRef.innerHTML = errorMessages.join('<br/>');
     errorRef.classList.add('visible');
   } finally {
     state.isSubmitLoading = false;
