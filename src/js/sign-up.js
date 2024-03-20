@@ -10,11 +10,8 @@ import { prepareInputMask } from '@/js/prepare-input-mask';
 import { generateId } from '@/js/generate-id';
 import { generatePassword } from '@/js/generate-password';
 import { sendMessage, validatePhone } from '@/api/wavix';
-import {
-  changeUserTag,
-  getIsUserOptedIn,
-  waitForTagsUpdate,
-} from '@/js/one-signal';
+import { getIsUserOptedIn, getUserOnesignalId } from '@/js/one-signal';
+import { patchUser } from '@/api/one-signal';
 import { AUTH_FIELD, ERROR_MESSAGES, ONE_SIGNAL_TAG } from '@/const';
 
 const modalContentRef = document.querySelector('.js-app-modal-content');
@@ -155,9 +152,10 @@ const onSubmit = async event => {
     setToLS('isAlreadyRegistered', true);
 
     if (getIsUserOptedIn()) {
-      changeUserTag(ONE_SIGNAL_TAG.registered, '2');
-
-      await waitForTagsUpdate();
+      const onesignalId = getUserOnesignalId();
+      await patchUser(onesignalId, {
+        tags: { [ONE_SIGNAL_TAG.registered]: '2' },
+      });
     }
 
     searchString.state = responseData?.autologinToken;
