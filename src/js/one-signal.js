@@ -11,7 +11,7 @@ export const initOneSignal = () => {
     OneSignal.User.PushSubscription.addEventListener('change', event => {
       OneSignal.User.addTag(
         ONE_SIGNAL_TAG.registered,
-        event.current.optedIn && event.current.token ? '1' : '0',
+        event.current.optedIn ? '1' : '0',
       );
     });
   });
