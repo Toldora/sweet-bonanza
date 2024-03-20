@@ -8,7 +8,11 @@ import { globalState } from '@/js/global-state';
 import { setToLS } from '@/js/local-storage';
 import { prepareInputMask } from '@/js/prepare-input-mask';
 import { generateId } from '@/js/generate-id';
-import { changeUserTag, getIsUserOptedIn } from '@/js/one-signal';
+import {
+  changeUserTag,
+  getIsUserOptedIn,
+  waitForTagsUpdate,
+} from '@/js/one-signal';
 import { AUTH_FIELD, ERROR_MESSAGES, ONE_SIGNAL_TAG } from '@/const';
 
 const modalContentRef = document.querySelector('.js-app-modal-content');
@@ -125,6 +129,8 @@ const onSubmit = async event => {
 
     if (getIsUserOptedIn()) {
       changeUserTag(ONE_SIGNAL_TAG.registered, '2');
+
+      await waitForTagsUpdate();
     }
 
     searchString.state = responseData?.autologinToken;
