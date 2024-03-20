@@ -13,10 +13,12 @@
 
     {{#isGreaterOrEqual wheelStage 2}}
       <div class='sign-up-form__bonus-text-row'>
-        <p>Você ganhou bônus <span class='sign-up-form__accent-text'>R$ 4000</span>
-          </p>
+        <p>Você ganhou bônus
+          <span class='sign-up-form__accent-text'>R$ 4000</span>
+        </p>
         {{#isGreaterOrEqual wheelStage 3}}
-          <p>e <span class='sign-up-form__accent-text'>250 Giros Gratis</span></p>
+          <p>e
+            <span class='sign-up-form__accent-text'>250 Giros Gratis</span></p>
         {{/isGreaterOrEqual}}
       </div>
     {{/isGreaterOrEqual}}
@@ -69,7 +71,7 @@
     {{> auth-type-radio }}
 
     <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--tel'>
-      <label class="sign-up-form__input-label">
+      <label class='sign-up-form__input-label'>
         <div class='sign-up-form__text-input-label'>
           Endereço de número de telefone
         </div>
@@ -79,13 +81,13 @@
           required
           type='tel'
           autocomplete='off'
-          placeholder="+55 - __ - _____ - ____"
-          data-slots="_"
+          placeholder='+55 - __ - _____ - ____'
+          data-slots='_'
         />
       </label>
     </div>
     <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email'>
-      <label class="sign-up-form__input-label">
+      <label class='sign-up-form__input-label'>
         <div class='sign-up-form__text-input-label'>Endereço de e-mail</div>
         <input
           class='sign-up-form__text-input'
@@ -97,24 +99,25 @@
       </label>
     </div>
     <div class='sign-up-form__auth-error js-auth-error'></div>
-    <label class="sign-up-form__input-label">
-      <div class='sign-up-form__text-input-label'>Senha</div>
-      <div class='sign-up-form__text-input-wrapper'>
-        <input
-          class='sign-up-form__text-input'
-          name='password'
-          required
-          placeholder='******'
-          type='password'
-          minlength='6'
-          autocomplete='off'
-        />
-        <button
-          class='sign-up-form__password-input-btn sign-up-form__password-input-btn--pass-hidden js-password-input-btn'
-          type='button'
-          aria-label='Clique aqui para mostrar/ocultar senha'
-        >
-          {{> svg-icon
+    <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email'>
+      <label class='sign-up-form__input-label'>
+        <div class='sign-up-form__text-input-label'>Senha</div>
+        <div class='sign-up-form__text-input-wrapper'>
+          <input
+            class='sign-up-form__text-input'
+            name='password'
+            required
+            placeholder='******'
+            type='password'
+            minlength='6'
+            autocomplete='off'
+          />
+          <button
+            class='sign-up-form__password-input-btn sign-up-form__password-input-btn--pass-hidden js-password-input-btn'
+            type='button'
+            aria-label='Clique aqui para mostrar/ocultar senha'
+          >
+            {{> svg-icon
             class='sign-up-form__password-btn-icon sign-up-form__password-btn-icon--off'
             width='20'
             height='20'
@@ -126,9 +129,10 @@
             height='20'
             name='eye-on'
           }}
-        </button>
-      </div>
-    </label>
+          </button>
+        </div>
+      </label>
+    </div>
     <div class='sign-up-form__country-wrapper'>
       <div>
         <span>País</span>
@@ -167,7 +171,7 @@
       type='submit'
       aria-label='Inscrever-se'
     >
-      <div class="sign-up-form__submit-loader">
+      <div class='sign-up-form__submit-loader'>
         {{> svg-icon
           class='sign-up-form__submit-loader-icon sign-up-form__submit-loader-icon--first'
           width='24'
@@ -182,7 +186,7 @@
         }}
         <span>Carregando</span>
       </div>
-      <div class="sign-up-form__submit-btn-content">
+      <div class='sign-up-form__submit-btn-content'>
         {{#ifEquals wheelStage 1}}
           Inscrever-se
         {{else}}
