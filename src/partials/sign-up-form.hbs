@@ -13,12 +13,12 @@
 
     {{#isGreaterOrEqual wheelStage 2}}
       <div class='sign-up-form__bonus-text-row'>
-        <p>Você ganhou bônus
+        <p>Você ganhou um bônus de
           <span class='sign-up-form__accent-text'>R$ 4000</span>
         </p>
         {{#isGreaterOrEqual wheelStage 3}}
           <p>e
-            <span class='sign-up-form__accent-text'>250 Giros Gratis</span></p>
+            <span class='sign-up-form__accent-text'>250 Giros Grátis</span></p>
         {{/isGreaterOrEqual}}
       </div>
     {{/isGreaterOrEqual}}
@@ -73,7 +73,13 @@
     <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--tel'>
       <label class='sign-up-form__input-label'>
         <div class='sign-up-form__text-input-label'>
-          Endereço de número de telefone
+          Digite seu número de telefone
+        </div>
+        <div class="sign-up-form__tel-input-wrapper">
+        <div class='sign-up-form__input-stub'>
+          {{> svg-icon class='sign-up-form__country-img' width="24" height="20" name='brazil-flag' }}
+
+          <span>+55</span>
         </div>
         <input
           class='sign-up-form__text-input'
@@ -81,14 +87,15 @@
           required
           type='tel'
           autocomplete='off'
-          placeholder='+55 - __ - _____ - ____'
+          placeholder='___________'
           data-slots='_'
         />
+        </div>
       </label>
     </div>
     <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email'>
       <label class='sign-up-form__input-label'>
-        <div class='sign-up-form__text-input-label'>Endereço de e-mail</div>
+        <div class='sign-up-form__text-input-label'>Digite seu endereço de e-mail</div>
         <input
           class='sign-up-form__text-input'
           name='email'
@@ -101,7 +108,7 @@
     <div class='sign-up-form__auth-error js-auth-error'></div>
     <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email'>
       <label class='sign-up-form__input-label'>
-        <div class='sign-up-form__text-input-label'>Senha</div>
+        <div class='sign-up-form__text-input-label'>Crie uma senha</div>
         <div class='sign-up-form__text-input-wrapper'>
           <input
             class='sign-up-form__text-input'
@@ -189,7 +196,7 @@
         {{#ifEquals wheelStage 1}}
           Inscrever-se
         {{else}}
-          Receba bônus
+          Receba seu bônus
         {{/ifEquals}}
       </div>
     </button>
