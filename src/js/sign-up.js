@@ -1,13 +1,16 @@
 import handlebars from 'handlebars';
-import { SignUpForm, compileSignUpFormMarkup } from 'mayanbet-sdk';
+import {
+  // SignUpForm,
+  compileSignUpFormMarkup,
+} from 'mayanbet-sdk';
 import signUpBonusesTemplate from '@/partials/sign-up-bonuses.hbs?raw';
 import { openModal } from '@/js/modal';
 // import { openLoginModal } from '@/js//login';
 import { globalState } from '@/js/global-state';
-import { setToLS } from '@/js/local-storage';
-import { getIsUserOptedIn, getUserOnesignalId } from '@/js/one-signal';
-import { patchUser } from '@/api/one-signal';
-import { ONE_SIGNAL_TAG } from '@/const';
+// import { setToLS } from '@/js/local-storage';
+// import { getIsUserOptedIn, getUserOnesignalId } from '@/js/one-signal';
+// import { patchUser } from '@/api/one-signal';
+// import { ONE_SIGNAL_TAG } from '@/const';
 
 const modalContentRef = document.querySelector('.js-app-modal-content');
 
@@ -27,19 +30,19 @@ export const openSignUpModal = ({ isBlocked } = {}) => {
   modalContentRef.innerHTML = '';
   modalContentRef.insertAdjacentHTML('beforeend', markup);
 
-  new SignUpForm({
-    formRef: document.forms.signUp,
-    submitCallback: async () => {
-      setToLS('isAlreadyRegistered', true);
+  // new SignUpForm({
+  //   formRef: document.forms.signUp,
+  //   submitCallback: async () => {
+  //     setToLS('isAlreadyRegistered', true);
 
-      if (getIsUserOptedIn()) {
-        const onesignalId = getUserOnesignalId();
-        await patchUser(onesignalId, {
-          tags: { [ONE_SIGNAL_TAG.registered]: '2' },
-        });
-      }
-    },
-  });
+  //     if (getIsUserOptedIn()) {
+  //       const onesignalId = getUserOnesignalId();
+  //       await patchUser(onesignalId, {
+  //         tags: { [ONE_SIGNAL_TAG.registered]: '2' },
+  //       });
+  //     }
+  //   },
+  // });
 
   openModal({ isBlocked });
 };
